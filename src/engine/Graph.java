@@ -7,14 +7,9 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 public class Graph {
-    //my graph interface
-    //for now just a collection of node objects
-    // how do we want to organize the nodes?
-    // do we start with one ?
-    // or do we house all of them in one place ?
-    //traversal i know,... breadth first search ... depth fist search .. will need to look into this
-    // caching ?
-    private static int nodeCount = 10000; //TODO: this might be able to be removed with a better datastructure... aither way might be good to have ?
+    //our graph interface
+    //this will do higher level action on nodes
+    //actions that do no belong in the node class, actions to do with a collection of different nodes per say
 
     //TODO: implement
     public boolean isIn(String key){
