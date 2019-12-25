@@ -12,7 +12,7 @@ public class Node {
     // we need a data structure that will take in a "edge", this edge points to "n" number of other points
     // this will also have to contain the TYPE of relation, this relation is determined by the user!
     // each node has a list of other nodes it can go to!
-    // for each node it can go to, there is also a "realtionship type / edge description" example: a friend, connection, follower
+    // for each node it can go to, there is also a "relationship type / edge description" example: a friend, connection, follower
     // therefore, we have a dynamic list of node:relation pairs ? where the node is the key... this seems like a terrible idea ...but will use for now!
 
     private  HashMap<String, ArrayList<Node> > relationMap; //TODO: get rid of having both... no good keeping track of two variables
@@ -42,6 +42,9 @@ public class Node {
     public String getLabel() {
         return label;
     }
+    public String getHashId() {
+        return hashId;
+    }
 
     public void setLabel(String label) {
         this.label = label;
@@ -67,7 +70,7 @@ public class Node {
         //find relation
         if(this.relationMap.containsKey(relation)){
             //NEED TO TEST
-            this.relationMap.get(relation).add(newNode); //is this sufficient ? or do we have to this (line below)
+            this.relationMap.get(relation).add(newNode); //is this sufficient ? or do we have to this (lines below)
             //STUPID//
             //ArrayList<Node> temp = this.relationMap.get(relation);
             //temp.add(newNode);
@@ -83,6 +86,8 @@ public class Node {
         return this.relationMap.get(relation);
     }
 
+    //The whole point of this.connectedNodes was so this function is not needed , faster run time, but more memory!
+    /*
     public ArrayList<Node> getAllNodes(String relation){
         ArrayList<Node> temp =  new ArrayList<Node>();
         //the below code is N time, technically
@@ -95,4 +100,5 @@ public class Node {
         }
         return temp;
     }
+     */
 }
