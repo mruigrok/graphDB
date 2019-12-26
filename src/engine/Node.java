@@ -75,6 +75,17 @@ public class Node {
         this.connectedNodes.add(newNode);
     }
 
+    public void removeNodeByRelation(String relation){
+      if(this.relationMap.containsKey(relation)){
+        this.relationMap.remove(relation);
+        //remove list of connected node with this relationship
+      }
+      else{
+        System.out.println("Cannot find node/relationship combination");
+      }
+
+    }
+
     //The whole point of this.connectedNodes was so this function is not needed , faster run time, but more memory!
     /*
     public ArrayList<Node> getAllNodes(String relation){
