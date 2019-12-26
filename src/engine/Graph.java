@@ -11,6 +11,7 @@ public class Graph {
     //this will do higher level action on nodes
     //actions that do no belong in the node class, actions to do with a collection of different nodes per say
 
+
     //TODO: implement
     public boolean isIn(String key){
         //search nodes and find the node if its there
@@ -35,10 +36,12 @@ public class Graph {
                 if(!visited.containsKey(n.getHashId()) || !visited.get(n.getHashId())){ //if not in there OR in there and is set to false ?
                     queue.add(n);
                     visited.put(node.getHashId(), true);
+                    //visited.put(n.getHashId(), true); would it be this? we want to mark each visited node "n" not "node"?
                 }
             }
         }
     }
+
 
     // Depth - First - Search
     public static void DFS(Node node){ // this function is static as it technically does not belong to Graph class (for now)
