@@ -16,7 +16,7 @@ things that need to be done
 
 ## test
 
-- whenever we create graph, create a unit test for it
+- whenever we create graph functions, create a unit test for it
 
 
 
