@@ -35,8 +35,7 @@ public class Graph {
             for(Node n : p.getConnectedNodes()){ //for-each loop
                 if(!visited.containsKey(n.getHashId()) || !visited.get(n.getHashId())){ //if not in there OR in there and is set to false ?
                     queue.add(n);
-                    visited.put(node.getHashId(), true);
-                    //visited.put(n.getHashId(), true); would it be this? we want to mark each visited node "n" not "node"?
+                    visited.put(n.getHashId(), true);
                 }
             }
         }
