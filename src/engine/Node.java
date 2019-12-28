@@ -75,7 +75,7 @@ public class Node {
         this.connectedNodes.add(newNode);
     }
 
-    public void removeNodeByRelation(String relation){
+    public void removeNodesByRelation(String relation){
       if(this.relationMap.containsKey(relation)){
         this.relationMap.remove(relation);
         //remove list of connected node with this relationship
