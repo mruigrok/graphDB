@@ -19,6 +19,10 @@ public class Graph {
         this.relations = new ArrayList<HashMap>();
     }
 
+    public int numberOfNodes(){
+      return allNodes.size();
+    }
+
     public void addVertice(String label){
         allNodes.put(label, new Node(label));
     }
@@ -27,9 +31,30 @@ public class Graph {
         allNodes.put(label, new Node(label, property));
     }
 
-    public void removeVertice(String label){
-      allNodes.remove(label);
+    public void removeRelation(String node1, String node2, String relation){
+        //error check
+        if(!isIn(node1)) {
+            System.err.println("err: couldnt find: " + node1);
+            return;
+        }
+        if(!isIn(node2)){
+            System.err.println("err: couldnt find: " + node2);
+            return;
+        }
+
+        String rKey = node1 + relation + node2;
+        //remove if found
+        for(HashMap<String, String> r : this.relations){
+          if(r.get("~id~") == rKey){
+            this.relations.remove(r);
+            this.relationKeys.remove(rKey);
+            System.out.println("success: removed relationship");
+            return;
+          }
+        }
+        System.out.println("err: couldn't find node-relationship pair");
     }
+
 
     public void addRelation(String node1, String node2, String relation){
 
