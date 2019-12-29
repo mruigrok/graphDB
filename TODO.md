@@ -4,8 +4,8 @@ things that need to be done
 ## engine
 
 - removing nodes
-- update label, property, relationship
-- ad-hoc search?
+- remove relationship
+- update relationship
 
 ## query
 
