@@ -1,7 +1,6 @@
 package test;
 
-import engine.Graph;
-import engine.Node;
+import engine.*;
 
 import java.io.FileDescriptor;
 import java.io.FileOutputStream;
@@ -58,10 +57,10 @@ public class Main {
 
         //reset io stream
         System.setOut(new PrintStream(new FileOutputStream(FileDescriptor.out)));
-        String expectedVal = "Reza\nCallum\nWassyng\nRuify\nBrad\nStinky\nRaccoon\nMalcolm\nEric\n";
+        String expectedVal = "RezaCallumWassyngRuifyBradStinkyRaccoonMalcolmEric";
 
         //check results
-        if( out.toString().equals(expectedVal) ){
+        if( out.toString().replaceAll("\\s+","").equals(expectedVal) ){
             successMessage();
         }else{
             failureMessage(expectedVal, out.toString());
@@ -79,10 +78,10 @@ public class Main {
 
         //reset io stream
         System.setOut(new PrintStream(new FileOutputStream(FileDescriptor.out)));
-        String expectedVal = "Reza\nCallum\nWassyng\nRuify\nStinky\nRaccoon\nBrad\nMalcolm\nEric\n";
+        String expectedVal = "RezaCallumWassyngRuifyStinkyRaccoonBradMalcolmEric";
 
         //check results
-        if( out.toString().equals(expectedVal) ){
+        if( out.toString().replaceAll("\\s+","").equals(expectedVal) ){
             successMessage();
         }else{
             failureMessage(expectedVal, out.toString());

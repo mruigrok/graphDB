@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="bb68a57e-bcf7-4028-8e2d-c9da98e9b26a" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/Graph.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/Graph.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/Node.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/Node.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/Main.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -57,8 +55,16 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="Test1" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="test.Main" />
+      <module name="graphDB" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <list>
       <item itemvalue="Application.Test" />
+      <item itemvalue="Application.Test1" />
       <item itemvalue="Application.Engine" />
     </list>
     <recent_temporary>
