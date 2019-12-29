@@ -6,6 +6,8 @@ things that need to be done
 - removing nodes
 - remove relationship
 - update relationship
+- find path between node  given some relation (relation is optional); returns boolean
+- find shortest path between two nodes given some relation (relation is optional); return oredered array list of nodes
 
 ## query
 
