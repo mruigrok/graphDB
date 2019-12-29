@@ -27,6 +27,10 @@ public class Graph {
         allNodes.put(label, new Node(label, property));
     }
 
+    public void removeVertice(String label){
+      allNodes.remove(label);
+    }
+
     public void addRelation(String node1, String node2, String relation){
 
         //error check
@@ -140,6 +144,7 @@ public class Graph {
         DFSUtil(node, visited);
     }
 
+    //private?
     public void DFSUtil(Node node, HashMap<String, Boolean> visited){
         visited.put(node.getHashId(), true);
         System.out.println(node.getLabel());
@@ -155,5 +160,7 @@ public class Graph {
     public void DFS(String node){
         this.DFS(this.findNode(node));
     }
+
+
 
 }
