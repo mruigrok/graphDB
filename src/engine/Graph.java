@@ -19,9 +19,7 @@ public class Graph {
         this.relations = new ArrayList<HashMap>();
     }
 
-    public int numberOfNodes(){
-      return allNodes.size();
-    }
+    public int numberOfVertices(){ return allNodes.size(); }
 
     public void addVertice(String label){
         allNodes.put(label, new Node(label));
@@ -32,32 +30,45 @@ public class Graph {
     }
 
     public void removeRelation(String node1, String node2, String relation){
-        //error check
+        /* error check- if you cant find nodes don't bother with relationships */
         if(!isIn(node1)) {
             System.err.println("err: couldnt find: " + node1);
             return;
         }
-        if(!isIn(node2)){
+        if(!isIn(node2)) {
             System.err.println("err: couldnt find: " + node2);
             return;
         }
-
         String rKey = node1 + relation + node2;
-        //remove if found
         for(HashMap<String, String> r : this.relations){
-          if(r.get("~id~") == rKey){
-            this.relations.remove(r);
-            this.relationKeys.remove(rKey);
-            System.out.println("success: removed relationship");
-            return;
-          }
+            if(r.get("~id~") == rKey){
+                /* remove if found */
+                this.relations.remove(r);
+                this.relationKeys.remove(rKey);
+                System.out.println("success: removed relationship");
+                return;
+            }
         }
         System.out.println("err: couldn't find node-relationship pair");
     }
 
+    public void removeVertex(Node vertex){
+        /*WORK ON THIS FUNCTON*/
+        if(allNodes.containsKey(vertex.getLabel())){
+            this.allNodes.remove(vertex.getLabel());
+            for(Node r: getOutgoingConnectedNodes(vertex)){
+                //remove relations
+            }
+            for(Node r: getIncomingConnectedNodes(vertex)){
+                //remove relations
+            }
+        }
+        else{
+            System.out.println("err: can't find vertex");
+        }
+    }
 
     public void addRelation(String node1, String node2, String relation){
-
         //error check
         if(!this.allNodes.containsKey(node1) ) {
             System.err.println("err: couldnt find: " + node1);
@@ -90,12 +101,7 @@ public class Graph {
     }
 
     public boolean isIn(String label){
-        if(allNodes.containsKey(label)){
-            return true;
-        }
-        else{
-            return false;
-        }
+        return allNodes.containsKey(label);
     }
 
     public ArrayList<Node> getOutgoingConnectedNodes(Node node, String relation){

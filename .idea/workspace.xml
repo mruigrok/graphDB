@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="bb68a57e-bcf7-4028-8e2d-c9da98e9b26a" name="Default Changelist" comment="">
+    <list default="true" id="c7a7eb78-d629-4593-af10-d8dd048a1327" name="Default Changelist" comment="node update">
+      <change beforePath="$PROJECT_DIR$/.idea/description.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/project-template.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/engine/Graph.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/Graph.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/engine/Node.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/Node.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/Main.java" afterDir="false" />
     </list>
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -19,24 +24,21 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1VQ2WGrXQ4JVfRhyylvJx5Bo0sX" />
   <component name="PropertiesComponent">
+    <property name="Downloaded.Files.Path.Enabled" value="false" />
+    <property name="Repository.Attach.Annotations" value="false" />
+    <property name="Repository.Attach.JavaDocs" value="false" />
+    <property name="Repository.Attach.Sources" value="false" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="settings.editor.selected.configurable" value="preferences.pathVariables" />
-  </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
   </component>
   <component name="RunManager" selected="Application.Test">
     <configuration name="Engine" type="Application" factoryName="Application" temporary="true">
@@ -72,6 +74,18 @@
         <item itemvalue="Application.Engine" />
       </list>
     </recent_temporary>
+  </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -125,6 +139,41 @@
     <MESSAGE value="updated readme" />
     <MESSAGE value="added query package" />
     <MESSAGE value="updated graph" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated graph" />
+    <MESSAGE value="node update" />
+    <option name="LAST_COMMIT_MESSAGE" value="node update" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="297" y="0" key="CommitChangelistDialog2" timestamp="1577662829067">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="297" y="0" key="CommitChangelistDialog2/0.0.1280.680@0.0.1280.680" timestamp="1577662829067" />
+    <state x="123" y="57" key="DiffContextDialog" timestamp="1577662677753">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="123" y="57" key="DiffContextDialog/0.0.1280.680@0.0.1280.680" timestamp="1577662677753" />
+    <state width="1237" height="67" key="GridCell.Tab.0.bottom" timestamp="1577662691062">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="1237" height="67" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1577662691062" />
+    <state width="1237" height="67" key="GridCell.Tab.0.center" timestamp="1577662691062">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="1237" height="67" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1577662691062" />
+    <state width="1237" height="67" key="GridCell.Tab.0.left" timestamp="1577662691062">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="1237" height="67" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1577662691062" />
+    <state width="1237" height="67" key="GridCell.Tab.0.right" timestamp="1577662691062">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="1237" height="67" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1577662691062" />
+    <state x="234" y="75" key="Vcs.Push.Dialog.v2" timestamp="1577663155781">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="234" y="75" key="Vcs.Push.Dialog.v2/0.0.1280.680@0.0.1280.680" timestamp="1577663155781" />
+    <state x="370" y="236" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD" timestamp="1577656992095">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="370" y="236" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD/0.0.1280.680@0.0.1280.680" timestamp="1577656992095" />
   </component>
 </project>
