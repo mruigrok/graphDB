@@ -21,28 +21,40 @@ public class Main {
         test_DFS();
     }
 
+    public static Graph createDummyGraph(){
+        //create new graphs, with vertices and relationships
+        Graph g = new Graph("test1");
+
+        g.addVertice("Reza");
+        g.addVertice("Ruify");
+        g.addVertice("Callum");
+        g.addVertice("Wassyng");
+        g.addVertice("Stinky");
+        g.addVertice("Raccoon");
+        g.addVertice("Brad");
+        g.addVertice("Malcolm");
+        g.addVertice("Eric");
+
+        g.addRelation("Reza", "Callum", "friend");
+        g.addRelation("Reza", "Wassyng", "friend");
+        g.addRelation("Reza", "Ruify", "friend");
+        g.addRelation("Reza", "Brad", "friend");
+
+        g.addRelation("Ruify", "Stinky", "friend");
+        g.addRelation("Ruify", "Raccoon", "friend");
+
+        g.addRelation("Brad", "Malcolm", "friend");
+        g.addRelation("Brad", "Eric", "friend");
+
+        return g;
+    }
+
     public static void test_BFS(){
         //set io to byte array
         java.io.ByteArrayOutputStream out = new java.io.ByteArrayOutputStream();
         System.setOut(new java.io.PrintStream(out));
 
-        //add friends to some node
-        Node t = new Node("Reza");
-        t.addNode(new Node("Callum"), "friend");
-        t.addNode(new Node("Wassyng"), "friend");
-        //create new node with some friends
-        Node t1 = new Node("Ruify");
-        t1.addNode(new Node("Stinky"), "friend");
-        t1.addNode(new Node("Raccoon"), "friend");
-        //create new node with some friends
-        Node t2 = new Node("Brad");
-        t2.addNode(new Node("Malcolm"), "friend");
-        t2.addNode(new Node("Eric"), "friend");
-        //add the independent nodes to create leveled graph
-        t.addNode(t1, "friend");
-        t.addNode(t2, "friend");
-
-        Graph.BFS(t);
+        createDummyGraph().BFS("Reza"); // bfs search from reza node
 
         //reset io stream
         System.setOut(new PrintStream(new FileOutputStream(FileDescriptor.out)));
@@ -56,27 +68,18 @@ public class Main {
         }
     }
 
+
     public static void test_DFS(){
         //set io to byte array
         java.io.ByteArrayOutputStream out = new java.io.ByteArrayOutputStream();
         System.setOut(new java.io.PrintStream(out));
 
-        //add friends to some node
-        Node t = new Node("Reza");
-        t.addNode(new Node("Callum"), "friend");
-        t.addNode(new Node("Wassyng"), "friend");
-        //create new node with some friends
-        Node t1 = new Node("Ruify");
-        t1.addNode(new Node("Stinky"), "friend");
-        t1.addNode(new Node("Raccoon"), "friend");
-        //add the two independent nodes to create leveled graph
-        t.addNode(t1, "friend");
 
-        Graph.DFS(t);
+        createDummyGraph().DFS("Reza"); // bfs search from reza node
 
         //reset io stream
         System.setOut(new PrintStream(new FileOutputStream(FileDescriptor.out)));
-        String expectedVal = "Reza\nCallum\nWassyng\nRuify\nStinky\nRaccoon\n";
+        String expectedVal = "Reza\nCallum\nWassyng\nRuify\nStinky\nRaccoon\nBrad\nMalcolm\nEric\n";
 
         //check results
         if( out.toString().equals(expectedVal) ){

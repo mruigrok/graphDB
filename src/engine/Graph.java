@@ -2,26 +2,115 @@ package engine;
 
 import engine.Node;
 
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.Queue;
+import java.lang.reflect.Array;
+import java.util.*;
 
 public class Graph {
-    //our graph interface
-    //this will do higher level action on nodes
-    //actions that do no belong in the node class, actions to do with a collection of different nodes per say
 
+    private HashMap<String, Node> allNodes;
+    private ArrayList<HashMap> relations;
+    private HashSet<String> relationKeys;
+    private String name = "";
 
-    //TODO: implement
-    public boolean isIn(String key){
-        //search nodes and find the node if its there
-        // can we grab a random node and start looking ?
-        return false;
+    public Graph(String name){
+        this.name = name;
+        this.allNodes = new HashMap<String, Node>();
+        this.relationKeys = new HashSet<String>();
+        this.relations = new ArrayList<HashMap>();
+    }
+
+    public void addVertice(String label){
+        allNodes.put(label, new Node(label));
+    }
+
+    public void addVertice(String label, String property){
+        allNodes.put(label, new Node(label, property));
+    }
+
+    public void addRelation(String node1, String node2, String relation){
+
+        //error check
+        if(!this.allNodes.containsKey(node1) ) {
+            System.err.println("err: couldnt find: " + node1);
+            return;
+        }
+        if(!this.allNodes.containsKey(node2)){
+            System.err.println("err: couldnt find: " + node2);
+            return;
+        }
+        //create relationKey
+        String relationKey = node1+relation+node2;
+        //add to set of relationKeys
+        this.relationKeys.add(relationKey);
+        HashMap<String, String> properties = new HashMap<String, String>();
+        properties.put("~relation~", relation);
+        properties.put("~node1~", node1);
+        properties.put("~node2~", node2);
+        properties.put("~id~", relationKey);
+        //add to set of relations
+        this.relations.add(properties);
+    }
+
+    public Node findNode(String label){
+        if(allNodes.containsKey(label)){
+            return allNodes.get(label);
+        }
+        else{
+            return null;
+        }
+    }
+
+    public boolean isIn(String label){
+        if(allNodes.containsKey(label)){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    public ArrayList<Node> getOutgoingConnectedNodes(Node node, String relation){
+        String label = node.getLabel();
+        ArrayList<Node> connections = new ArrayList<Node>();
+
+        for(HashMap<String, String> r : this.relations){
+            if(relation == null && r.get("~node1~") == label){
+                connections.add(this.allNodes.get(r.get("~node2~")));
+            }
+            else if(relation == r.get("~relation~") && r.get("~node1~") == label){
+                connections.add(this.allNodes.get(r.get("~node2~")));
+            }
+        }
+
+        return connections;
+    }
+
+    public ArrayList<Node> getIncomingConnectedNodes(Node node, String relation){
+        String label = node.getLabel();
+        ArrayList<Node> connections = new ArrayList<Node>();
+
+        for(HashMap<String, String> r : this.relations){
+            if(relation == null && r.get("~node2~") == label){
+                connections.add(this.allNodes.get(r.get("~node1~")));
+            }
+            else if(relation == r.get("~relation~") && r.get("~node2~") == label){
+                connections.add(this.allNodes.get(r.get("~node1~")));
+            }
+        }
+
+        return connections;
+    }
+
+    public ArrayList<Node> getOutgoingConnectedNodes(Node node){
+        return getOutgoingConnectedNodes(node, null);
+    }
+
+    public ArrayList<Node> getIncomingConnectedNodes(Node node){
+        return getIncomingConnectedNodes(node, null);
     }
 
     // Breadth - First - Search
-    //TODO: do we assume connectivity ... ?
-    public static void BFS(Node node){ // this function is static as it technically does not belong to Graph class (for now)
+    public void BFS(Node node){ // this function is static as it technically does not belong to Graph class (for now)
         //our visited map  //TODO: this does not fucking scale well lmao
 
         HashMap<String, Boolean> visited = new HashMap<>();
@@ -32,7 +121,7 @@ public class Graph {
         while(!queue.isEmpty()){
             Node p = queue.remove();
             System.out.println(p.getLabel());
-            for(Node n : p.getConnectedNodes()){ //for-each loop
+            for(Node n : this.getOutgoingConnectedNodes(p)){ //for-each loop
                 if(!visited.containsKey(n.getHashId()) || !visited.get(n.getHashId())){ //if not in there OR in there and is set to false ?
                     queue.add(n);
                     visited.put(n.getHashId(), true);
@@ -41,22 +130,30 @@ public class Graph {
         }
     }
 
+    public void BFS(String node){
+        this.BFS(this.findNode(node));
+    }
 
     // Depth - First - Search
-    public static void DFS(Node node){ // this function is static as it technically does not belong to Graph class (for now)
+    public void DFS(Node node){ // this function is static as it technically does not belong to Graph class (for now)
         HashMap<String, Boolean> visited = new HashMap<>();
         DFSUtil(node, visited);
     }
 
-    public static void DFSUtil(Node node, HashMap<String, Boolean> visited){
+    public void DFSUtil(Node node, HashMap<String, Boolean> visited){
         visited.put(node.getHashId(), true);
         System.out.println(node.getLabel());
 
-        for(Node n : node.getConnectedNodes()){
+        for(Node n : this.getOutgoingConnectedNodes(node)){
             if(!visited.containsKey(n.getHashId()) || !visited.get(n.getHashId())){ //if haven't visited it
                 DFSUtil(n, visited);
             }
         }
 
     }
+
+    public void DFS(String node){
+        this.DFS(this.findNode(node));
+    }
+
 }
