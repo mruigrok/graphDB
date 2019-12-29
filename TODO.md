@@ -4,10 +4,8 @@ things that need to be done
 ## engine
 
 - removing nodes
-- update label, property, relationship
-- ad-hoc search?
-- graph class needs a collection of ROOT nodes
-- search by relationship/property
+- remove relationship
+- update relationship
 
 ## query
 
