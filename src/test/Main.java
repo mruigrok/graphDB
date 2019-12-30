@@ -94,21 +94,28 @@ public class Main {
     public static void test_removeRelation(){
         Graph g = createDummyGraph();
         g.printAllRelationships();
-        g.removeRelation(g.findNode("Reza"), g.findNode("Callum"), "friend");
+        g.removeRelation("Reza","Callum", "friend");
         g.printAllRelationships();
-        g.removeRelation(g.findNode("Reza"), g.findNode("Callum"), "enemy");
+        g.removeRelation("Reza", "Callum", "enemy");
     }
 
     public static void test_removeVertex(){
         Graph g = createDummyGraph();
-        g.BFS(g.findNode("Reza"));
+        g.BFS(g.getNode("Reza"));
         g.printAllRelationships();
-        g.removeVertex(g.findNode("Raccoon"));
-        g.removeVertex(g.findNode("Reza"));
+        g.removeVertex("Raccoon");
+        g.removeVertex("Eric");
+        g.removeVertex(g.getNode("Malcolm"));
         g.printAllRelationships();
-        //g.BFS(g.findNode("Reza"));
-        g.BFS(g.findNode("Ruify"));
+        g.BFS(g.getNode("Reza"));
+        //g.BFS(g.findNode("Ruify"));
+        g.removeRelation(g.getNode("Reza"), g.getNode("Ruify"), "friend");
+        g.updateRelation("Reza", "Callum", "friend", "buddies");
+        g.printAllRelationships();
+        g.updateRelation(g.getNode("Reza"), g.getNode("Callum"), "buddies", "enemy");
+        g.printAllRelationships();
     }
+
     public static void successMessage(){
         System.out.println(ANSI_GREEN + "success!" + ANSI_RESET);
     }

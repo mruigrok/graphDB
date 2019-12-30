@@ -38,38 +38,45 @@ public class Graph {
     }
 
     public void removeVertex(Node vertex){
-        String label = vertex.getLabel();
-        if(allNodes.containsKey(label)){
+        this.removeVertex(vertex.getLabel());
+    }
+
+    public void removeVertex(String vertex){
+        if(allNodes.containsKey(vertex)){
             //remove relation and relationKey between nodes
-            for(Node r : getOutgoingConnectedNodes(vertex)){
-                for(String s : findRelations(vertex, r)){
+            for(Node r : getOutgoingConnectedNodes(getNode(vertex))){
+                for(String s : findRelations(vertex, r.getLabel())){
                     //in case of multiple relations between the two
-                    removeRelation(vertex, r, s);
+                    removeRelation(vertex, r.getLabel(), s);
                 }
             }
-            for(Node r: getIncomingConnectedNodes(vertex)){
-                for(String s : findRelations(r, vertex)){
-                    removeRelation(r, vertex, s);
+            for(Node r: getIncomingConnectedNodes(getNode(vertex))){
+                for(String s : findRelations(r.getLabel(), vertex)){
+                    removeRelation(r.getLabel(), vertex, s);
                 }
             }
-            this.allNodes.remove(label);
+            this.allNodes.remove(vertex);
         }
         else{
             System.out.println("err: can't find vertex");
         }
     }
 
-    public void removeRelation(Node node1, Node node2, String relation){
+    public void removeRelation(Node node1,Node node2, String relation){
+        this.removeRelation(node1.getLabel(), node2.getLabel(), relation);
+    }
+
+    public void removeRelation(String node1, String node2, String relation){
         /* error check- if you cant find nodes don't bother with relationships */
-        if(!isIn(node1.getLabel())) {
-            //System.err.println("err: couldnt find: " + node1.getLabel());
+        if(!isIn(node1)) {
+            //System.err.println("err: couldnt find: " + node1);
             return;
         }
-        if(!isIn(node2.getLabel())) {
-            //System.err.println("err: couldnt find: " + node2.getLabel());
+        if(!isIn(node2)) {
+            //System.err.println("err: couldnt find: " + node2);
             return;
         }
-        String rKey = node1.getLabel() + relation + node2.getLabel();
+        String rKey = node1 + relation + node2;
         for(HashMap<String, String> r : this.relations){
             if(r.get("~id~").equals(rKey)){
                 /* remove if found */
@@ -82,7 +89,7 @@ public class Graph {
         System.out.println("err: couldn't find node-relationship pair");
     }
 
-    //Maybe change the string type to Node? just to save the .getLabel() later on
+
     public void addRelation(String node1, String node2, String relation){
         //error check
         if(!this.allNodes.containsKey(node1) ) {
@@ -106,24 +113,47 @@ public class Graph {
         this.relations.add(properties);
     }
 
-    public ArrayList<String> findRelations(Node node1, Node node2){
+    public ArrayList<String> findRelations(String node1, String node2){
         //find all the relationships in the direction of node 1 to node 2
         ArrayList<String> relations = new ArrayList<String>();
         for(HashMap<String, String> r : this.relations){
-            if(r.get("~node1~").equals(node1.getLabel()) && r.get("~node2~").equals(node2.getLabel())){
+            if(r.get("~node1~").equals(node1) && r.get("~node2~").equals(node2)){
                 relations.add(r.get("~relation~"));
             }
         }
         return relations;
     }
 
-    public void updateRelation(Node node1, Node node2, String oldRelation, String newRelation){
-        //need some conditional to ensure their is the old relationship ****WORK ON THIS******
-        removeRelation(node1, node2, oldRelation);
-        addRelation(node1.getLabel(), node2.getLabel(), newRelation);
+    public ArrayList<String> findOutgoingRelations(String node1){
+        ArrayList<String> outgoingRelations = new ArrayList<String>();
+        for(HashMap<String, String> r : this.relations){
+            if(r.get("~node1~").equals(node1)){
+                outgoingRelations.add((r.get("~relation~")));
+            }
+        }
+        return outgoingRelations;
     }
 
-    public Node findNode(String label){
+    public ArrayList<String> findIncomingRelations(String node1) {
+        ArrayList<String> incomingRelations = new ArrayList<String>();
+        for(HashMap<String, String> r : this.relations){
+            if(r.get("~node2~").equals(node1)){
+                incomingRelations.add((r.get("~relation~")));
+            }
+        }
+        return incomingRelations;
+    }
+
+    public void updateRelation(Node node1, Node node2, String oldRelation, String newRelation){
+        this.updateRelation(node1.getLabel(), node2.getLabel(), oldRelation, newRelation);
+    }
+
+    public void updateRelation(String node1, String node2, String oldRelation, String newRelation){
+        removeRelation(node1, node2, oldRelation);
+        addRelation(node1, node2, newRelation);
+    }
+
+    public Node getNode(String label){
         if(allNodes.containsKey(label)){
             return allNodes.get(label);
         }
@@ -198,7 +228,7 @@ public class Graph {
     }
 
     public void BFS(String node){
-        this.BFS(this.findNode(node));
+        this.BFS(this.getNode(node));
     }
 
     // Depth - First - Search
@@ -221,7 +251,7 @@ public class Graph {
     }
 
     public void DFS(String node){
-        this.DFS(this.findNode(node));
+        this.DFS(this.getNode(node));
     }
 
 
