@@ -29,19 +29,41 @@ public class Graph {
         allNodes.put(label, new Node(label, property));
     }
 
-    public void removeRelation(String node1, String node2, String relation){
+    public void removeVertex(Node vertex){
+        if(allNodes.containsKey(vertex.getLabel())){
+            //remove vertex from all nodes
+            this.allNodes.remove(vertex.getLabel());
+            //remove relation and relationKey between nodes
+            for(Node r : getOutgoingConnectedNodes(vertex)){
+                for(String s : findRelations(vertex, r)){
+                    //in case of multiple relations between the two
+                    removeRelation(vertex, r, s);
+                }
+            }
+            for(Node r: getIncomingConnectedNodes(vertex)){
+                for(String s : findRelations(r, vertex)){
+                    removeRelation(r, vertex, s);
+                }
+            }
+        }
+        else{
+            System.out.println("err: can't find vertex");
+        }
+    }
+
+    public void removeRelation(Node node1, Node node2, String relation){
         /* error check- if you cant find nodes don't bother with relationships */
-        if(!isIn(node1)) {
-            System.err.println("err: couldnt find: " + node1);
+        if(!isIn(node1.getLabel())) {
+            System.err.println("err: couldnt find: " + node1.getLabel());
             return;
         }
-        if(!isIn(node2)) {
-            System.err.println("err: couldnt find: " + node2);
+        if(!isIn(node2.getLabel())) {
+            System.err.println("err: couldnt find: " + node2.getLabel());
             return;
         }
-        String rKey = node1 + relation + node2;
+        String rKey = node1.getLabel() + relation + node2.getLabel();
         for(HashMap<String, String> r : this.relations){
-            if(r.get("~id~") == rKey){
+            if(r.get("~id~").equals(rKey)){
                 /* remove if found */
                 this.relations.remove(r);
                 this.relationKeys.remove(rKey);
@@ -52,22 +74,7 @@ public class Graph {
         System.out.println("err: couldn't find node-relationship pair");
     }
 
-    public void removeVertex(Node vertex){
-        /*WORK ON THIS FUNCTON*/
-        if(allNodes.containsKey(vertex.getLabel())){
-            this.allNodes.remove(vertex.getLabel());
-            for(Node r: getOutgoingConnectedNodes(vertex)){
-                //remove relations
-            }
-            for(Node r: getIncomingConnectedNodes(vertex)){
-                //remove relations
-            }
-        }
-        else{
-            System.out.println("err: can't find vertex");
-        }
-    }
-
+    //Maybe change the string type to Node? just to save the .getLabel() later on
     public void addRelation(String node1, String node2, String relation){
         //error check
         if(!this.allNodes.containsKey(node1) ) {
@@ -89,6 +96,23 @@ public class Graph {
         properties.put("~id~", relationKey);
         //add to set of relations
         this.relations.add(properties);
+    }
+
+    public ArrayList<String> findRelations(Node node1, Node node2){
+        //find all the relationships in the direction of node 1 to node 2
+        ArrayList<String> relations = new ArrayList<String>();
+        for(HashMap<String, String> r : this.relations){
+            if(r.get("~node1~").equals(node1.getLabel()) && r.get("~node2~").equals(node2.getLabel())){
+                relations.add(r.get("~relation~"));
+            }
+        }
+        return relations;
+    }
+
+    public void updateRelation(Node node1, Node node2, String oldRelation, String newRelation){
+        //need some conditional to ensure their is the old relationship ****WORK ON THIS******
+        removeRelation(node1, node2, oldRelation);
+        addRelation(node1.getLabel(), node2.getLabel(), newRelation);
     }
 
     public Node findNode(String label){

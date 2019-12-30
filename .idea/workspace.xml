@@ -1,15 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c7a7eb78-d629-4593-af10-d8dd048a1327" name="Default Changelist" comment="node update">
-      <change beforePath="$PROJECT_DIR$/.idea/description.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/project-template.xml" beforeDir="false" />
+    <list default="true" id="c7a7eb78-d629-4593-af10-d8dd048a1327" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/engine/Graph.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/Graph.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/Node.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/Node.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -119,7 +113,14 @@
       <option name="project" value="LOCAL" />
       <updated>1577250350047</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="node update">
+      <created>1577663171374</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1577663171374</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -143,10 +144,10 @@
     <option name="LAST_COMMIT_MESSAGE" value="node update" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="297" y="0" key="CommitChangelistDialog2" timestamp="1577662829067">
+    <state x="262" y="0" key="CommitChangelistDialog2" timestamp="1577729746251">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="297" y="0" key="CommitChangelistDialog2/0.0.1280.680@0.0.1280.680" timestamp="1577662829067" />
+    <state x="262" y="0" key="CommitChangelistDialog2/0.0.1280.680@0.0.1280.680" timestamp="1577729746251" />
     <state x="123" y="57" key="DiffContextDialog" timestamp="1577662677753">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
@@ -167,10 +168,10 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state width="1237" height="67" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1577662691062" />
-    <state x="234" y="75" key="Vcs.Push.Dialog.v2" timestamp="1577663155781">
+    <state x="234" y="75" key="Vcs.Push.Dialog.v2" timestamp="1577663185392">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="234" y="75" key="Vcs.Push.Dialog.v2/0.0.1280.680@0.0.1280.680" timestamp="1577663155781" />
+    <state x="234" y="75" key="Vcs.Push.Dialog.v2/0.0.1280.680@0.0.1280.680" timestamp="1577663185392" />
     <state x="370" y="236" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD" timestamp="1577656992095">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
