@@ -5,6 +5,7 @@ import engine.*;
 import java.io.FileDescriptor;
 import java.io.FileOutputStream;
 import java.io.PrintStream;
+//import String.utils;
 
 public class Main {
     //variables like this are ok to global everywhere, not just for this test class! keep this in mind
@@ -18,6 +19,8 @@ public class Main {
         test_BFS();
         System.out.println("Testing DFS:");
         test_DFS();
+        //test_removeRelation();
+        test_removeVertex();
     }
 
     public static Graph createDummyGraph(){
@@ -86,6 +89,31 @@ public class Main {
         }else{
             failureMessage(expectedVal, out.toString());
         }
+    }
+
+    public static void test_removeRelation(){
+        Graph g = createDummyGraph();
+        g.printAllRelationships();
+        g.removeRelation("Reza","Callum", "friend");
+        g.printAllRelationships();
+        g.removeRelation("Reza", "Callum", "enemy");
+    }
+
+    public static void test_removeVertex(){
+        Graph g = createDummyGraph();
+        g.BFS(g.getNode("Reza"));
+        g.printAllRelationships();
+        g.removeVertex("Raccoon");
+        g.removeVertex("Eric");
+        g.removeVertex(g.getNode("Malcolm"));
+        g.printAllRelationships();
+        g.BFS(g.getNode("Reza"));
+        //g.BFS(g.findNode("Ruify"));
+        g.removeRelation(g.getNode("Reza"), g.getNode("Ruify"), "friend");
+        g.updateRelation("Reza", "Callum", "friend", "buddies");
+        g.printAllRelationships();
+        g.updateRelation(g.getNode("Reza"), g.getNode("Callum"), "buddies", "enemy");
+        g.printAllRelationships();
     }
 
     public static void successMessage(){
