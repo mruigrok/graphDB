@@ -29,11 +29,11 @@ public class Graph {
 
     public int numberOfVertices(){ return allNodes.size(); }
 
-    public void addVertice(String label){
+    public void addVertex(String label){
         allNodes.put(label, new Node(label));
     }
 
-    public void addVertice(String label, String property){
+    public void addVertex(String label, String property){
         allNodes.put(label, new Node(label, property));
     }
 
@@ -82,7 +82,7 @@ public class Graph {
                 /* remove if found */
                 this.relations.remove(r);
                 this.relationKeys.remove(rKey);
-                System.out.println("success: removed relationship");
+                //System.out.println("success: removed relationship");
                 return;
             }
         }
@@ -111,6 +111,10 @@ public class Graph {
         properties.put("~id~", relationKey);
         //add to set of relations
         this.relations.add(properties);
+    }
+
+    public boolean isRelation(String key){
+        return relationKeys.contains(key);
     }
 
     public ArrayList<String> findRelations(String node1, String node2){
@@ -236,9 +240,8 @@ public class Graph {
         HashMap<String, Boolean> visited = new HashMap<>();
         DFSUtil(node, visited);
     }
-
-    //private?
-    public void DFSUtil(Node node, HashMap<String, Boolean> visited){
+    
+    private void DFSUtil(Node node, HashMap<String, Boolean> visited){
         visited.put(node.getHashId(), true);
         System.out.println(node.getLabel());
 

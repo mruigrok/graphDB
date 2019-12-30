@@ -19,23 +19,24 @@ public class Main {
         test_BFS();
         System.out.println("Testing DFS:");
         test_DFS();
-        //test_removeRelation();
+        System.out.println("Testing removing vertex:");
         test_removeVertex();
+        //can also use test_removeRelation
     }
 
     public static Graph createDummyGraph(){
         //create new graphs, with vertices and relationships
         Graph g = new Graph("test1");
 
-        g.addVertice("Reza");
-        g.addVertice("Ruify");
-        g.addVertice("Callum");
-        g.addVertice("Wassyng");
-        g.addVertice("Stinky");
-        g.addVertice("Raccoon");
-        g.addVertice("Brad");
-        g.addVertice("Malcolm");
-        g.addVertice("Eric");
+        g.addVertex("Reza");
+        g.addVertex("Ruify");
+        g.addVertex("Callum");
+        g.addVertex("Wassyng");
+        g.addVertex("Stinky");
+        g.addVertex("Raccoon");
+        g.addVertex("Brad");
+        g.addVertex("Malcolm");
+        g.addVertex("Eric");
 
         g.addRelation("Reza", "Callum", "friend");
         g.addRelation("Reza", "Wassyng", "friend");
@@ -91,29 +92,32 @@ public class Main {
         }
     }
 
-    public static void test_removeRelation(){
-        Graph g = createDummyGraph();
-        g.printAllRelationships();
-        g.removeRelation("Reza","Callum", "friend");
-        g.printAllRelationships();
-        g.removeRelation("Reza", "Callum", "enemy");
-    }
-
     public static void test_removeVertex(){
         Graph g = createDummyGraph();
-        g.BFS(g.getNode("Reza"));
-        g.printAllRelationships();
+
         g.removeVertex("Raccoon");
         g.removeVertex("Eric");
         g.removeVertex(g.getNode("Malcolm"));
-        g.printAllRelationships();
-        g.BFS(g.getNode("Reza"));
-        //g.BFS(g.findNode("Ruify"));
         g.removeRelation(g.getNode("Reza"), g.getNode("Ruify"), "friend");
         g.updateRelation("Reza", "Callum", "friend", "buddies");
-        g.printAllRelationships();
         g.updateRelation(g.getNode("Reza"), g.getNode("Callum"), "buddies", "enemy");
-        g.printAllRelationships();
+
+        if( g.isIn("Raccoon") || g.isIn("Eric") || g.isIn("Malcolm")){ // these should all be false
+            failureMessage("", "Raccoon or Eric or Malcolm in graph!");
+            return;
+        }
+
+        if(g.isRelation("RezafriendRuify")){
+            failureMessage("relation RezafriendRuify should be gone!", "relation RezafriendRuify still exists");
+            return;
+        }
+
+        if(!g.isRelation("RezaenemyCallum")){
+            failureMessage("relation RezaenemyCallum", "relation RezafriendRuify doesn't exist");
+            return;
+        }
+
+        successMessage();
     }
 
     public static void successMessage(){
