@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c7a7eb78-d629-4593-af10-d8dd048a1327" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/engine/Graph.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/Graph.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/Main.java" afterDir="false" />
@@ -19,19 +20,10 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_BRANCH_BY_REPOSITORY">
-      <map>
-        <entry key="$PROJECT_DIR$" value="master" />
-      </map>
-    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1VQ2WGrXQ4JVfRhyylvJx5Bo0sX" />
   <component name="PropertiesComponent">
-    <property name="Downloaded.Files.Path.Enabled" value="false" />
-    <property name="Repository.Attach.Annotations" value="false" />
-    <property name="Repository.Attach.JavaDocs" value="false" />
-    <property name="Repository.Attach.Sources" value="false" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="settings.editor.selected.configurable" value="preferences.pathVariables" />
   </component>
@@ -114,28 +106,7 @@
       <option name="project" value="LOCAL" />
       <updated>1577250350047</updated>
     </task>
-    <task id="LOCAL-00004" summary="node update">
-      <created>1577663171374</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1577663171374</updated>
-    </task>
-    <task id="LOCAL-00005" summary="Remove vertex/relation update">
-      <created>1577729780426</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1577729780426</updated>
-    </task>
-    <task id="LOCAL-00006" summary="Remove vertex/relation update fixed. rough test cases rn">
-      <created>1577736428651</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1577736428651</updated>
-    </task>
-    <option name="localTasksCounter" value="7" />
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -155,43 +126,24 @@
     <MESSAGE value="updated readme" />
     <MESSAGE value="added query package" />
     <MESSAGE value="updated graph" />
-    <MESSAGE value="node update" />
-    <MESSAGE value="Remove vertex/relation update" />
-    <MESSAGE value="Remove vertex/relation update fixed. rough test cases rn" />
-    <option name="LAST_COMMIT_MESSAGE" value="Remove vertex/relation update fixed. rough test cases rn" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated graph" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="262" y="0" key="CommitChangelistDialog2" timestamp="1577743541023">
+    <state width="1237" height="413" key="GridCell.Tab.0.bottom" timestamp="1577744668670">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="262" y="0" key="CommitChangelistDialog2/0.0.1280.680@0.0.1280.680" timestamp="1577743541023" />
-    <state x="123" y="57" key="DiffContextDialog" timestamp="1577662677753">
+    <state width="1237" height="413" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1577744668670" />
+    <state width="1237" height="413" key="GridCell.Tab.0.center" timestamp="1577744668670">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="123" y="57" key="DiffContextDialog/0.0.1280.680@0.0.1280.680" timestamp="1577662677753" />
-    <state width="1237" height="413" key="GridCell.Tab.0.bottom" timestamp="1577743446650">
+    <state width="1237" height="413" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1577744668670" />
+    <state width="1237" height="413" key="GridCell.Tab.0.left" timestamp="1577744668670">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1237" height="413" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1577743446650" />
-    <state width="1237" height="413" key="GridCell.Tab.0.center" timestamp="1577743446650">
+    <state width="1237" height="413" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1577744668670" />
+    <state width="1237" height="413" key="GridCell.Tab.0.right" timestamp="1577744668670">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state width="1237" height="413" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1577743446650" />
-    <state width="1237" height="413" key="GridCell.Tab.0.left" timestamp="1577743446650">
-      <screen x="0" y="0" width="1280" height="680" />
-    </state>
-    <state width="1237" height="413" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1577743446650" />
-    <state width="1237" height="413" key="GridCell.Tab.0.right" timestamp="1577743446650">
-      <screen x="0" y="0" width="1280" height="680" />
-    </state>
-    <state width="1237" height="413" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1577743446650" />
-    <state x="234" y="75" key="Vcs.Push.Dialog.v2" timestamp="1577736445926">
-      <screen x="0" y="0" width="1280" height="680" />
-    </state>
-    <state x="234" y="75" key="Vcs.Push.Dialog.v2/0.0.1280.680@0.0.1280.680" timestamp="1577736445926" />
-    <state x="370" y="236" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD" timestamp="1577656992095">
-      <screen x="0" y="0" width="1280" height="680" />
-    </state>
-    <state x="370" y="236" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD/0.0.1280.680@0.0.1280.680" timestamp="1577656992095" />
+    <state width="1237" height="413" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1577744668670" />
   </component>
 </project>

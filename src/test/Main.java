@@ -106,6 +106,7 @@ public class Main {
         g.removeVertex("Raccoon");
         g.removeVertex("Eric");
         g.removeVertex(g.getNode("Malcolm"));
+        /*
         g.printAllRelationships();
         g.BFS(g.getNode("Reza"));
         //g.BFS(g.findNode("Ruify"));
@@ -114,6 +115,8 @@ public class Main {
         g.printAllRelationships();
         g.updateRelation(g.getNode("Reza"), g.getNode("Callum"), "buddies", "enemy");
         g.printAllRelationships();
+         */
+        g.removeVertex(g.getNode("brafe"));
     }
 
     public static void successMessage(){
