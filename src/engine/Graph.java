@@ -38,7 +38,9 @@ public class Graph {
     }
 
     public void removeVertex(Node vertex){
-        this.removeVertex(vertex.getLabel());
+        if(vertex == null){
+            System.out.println("err: can't find vertex");
+        }else{this.removeVertex(vertex.getLabel());}
     }
 
     public void removeVertex(String vertex){

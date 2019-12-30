@@ -98,6 +98,7 @@ public class Main {
         g.removeVertex("Raccoon");
         g.removeVertex("Eric");
         g.removeVertex(g.getNode("Malcolm"));
+
         g.removeRelation(g.getNode("Reza"), g.getNode("Ruify"), "friend");
         g.updateRelation("Reza", "Callum", "friend", "buddies");
         g.updateRelation(g.getNode("Reza"), g.getNode("Callum"), "buddies", "enemy");
