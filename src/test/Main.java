@@ -19,6 +19,8 @@ public class Main {
         test_BFS();
         System.out.println("Testing DFS:");
         test_DFS();
+        //test_removeRelation();
+        test_removeVertex();
     }
 
     public static Graph createDummyGraph(){
@@ -89,6 +91,24 @@ public class Main {
         }
     }
 
+    public static void test_removeRelation(){
+        Graph g = createDummyGraph();
+        g.printAllRelationships();
+        g.removeRelation(g.findNode("Reza"), g.findNode("Callum"), "friend");
+        g.printAllRelationships();
+        g.removeRelation(g.findNode("Reza"), g.findNode("Callum"), "enemy");
+    }
+
+    public static void test_removeVertex(){
+        Graph g = createDummyGraph();
+        g.BFS(g.findNode("Reza"));
+        g.printAllRelationships();
+        g.removeVertex(g.findNode("Raccoon"));
+        g.removeVertex(g.findNode("Reza"));
+        g.printAllRelationships();
+        //g.BFS(g.findNode("Reza"));
+        g.BFS(g.findNode("Ruify"));
+    }
     public static void successMessage(){
         System.out.println(ANSI_GREEN + "success!" + ANSI_RESET);
     }

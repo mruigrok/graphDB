@@ -19,6 +19,14 @@ public class Graph {
         this.relations = new ArrayList<HashMap>();
     }
 
+    public void printAllNodes(){
+        for(String i : this.allNodes.keySet()){
+            System.out.println(i);
+        }
+    }
+
+    public void printAllRelationships(){ System.out.println(this.relationKeys); }
+
     public int numberOfVertices(){ return allNodes.size(); }
 
     public void addVertice(String label){
@@ -30,9 +38,8 @@ public class Graph {
     }
 
     public void removeVertex(Node vertex){
-        if(allNodes.containsKey(vertex.getLabel())){
-            //remove vertex from all nodes
-            this.allNodes.remove(vertex.getLabel());
+        String label = vertex.getLabel();
+        if(allNodes.containsKey(label)){
             //remove relation and relationKey between nodes
             for(Node r : getOutgoingConnectedNodes(vertex)){
                 for(String s : findRelations(vertex, r)){
@@ -45,6 +52,7 @@ public class Graph {
                     removeRelation(r, vertex, s);
                 }
             }
+            this.allNodes.remove(label);
         }
         else{
             System.out.println("err: can't find vertex");
@@ -54,11 +62,11 @@ public class Graph {
     public void removeRelation(Node node1, Node node2, String relation){
         /* error check- if you cant find nodes don't bother with relationships */
         if(!isIn(node1.getLabel())) {
-            System.err.println("err: couldnt find: " + node1.getLabel());
+            //System.err.println("err: couldnt find: " + node1.getLabel());
             return;
         }
         if(!isIn(node2.getLabel())) {
-            System.err.println("err: couldnt find: " + node2.getLabel());
+            //System.err.println("err: couldnt find: " + node2.getLabel());
             return;
         }
         String rKey = node1.getLabel() + relation + node2.getLabel();
