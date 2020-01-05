@@ -140,6 +140,21 @@ public class Main {
             return;
         }
 
+        if( !g.isPath( g.getNode("Reza"), g.getNode("Callum"), "friend" ) ){
+            failureMessage("true", "false");
+            return;
+        }
+
+        if( g.isPath( g.getNode("Callum"), g.getNode("Ruify"), "friend" ) ){
+            failureMessage("false", "true");
+            return;
+        }
+
+        if( g.isPath( g.getNode("Reza"), g.getNode("Malcolm"), "friends" ) ){
+            failureMessage("false", "true");
+            return;
+        }
+
         successMessage();
 
     }
