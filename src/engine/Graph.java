@@ -259,6 +259,32 @@ public class Graph {
         this.DFS(this.getNode(node));
     }
 
+    public boolean isPath(Node node1, Node node2){ // for isPath we copied the BFS algorithm
+        if(node1 == null || node2 == null){
+            return false;
+        }
+
+        String lookingFor = node2.getHashId();
+        HashMap<String, Boolean> visited = new HashMap<>();
+        Queue<Node> queue = new LinkedList<Node>();
+        queue.add(node1);
+        visited.put(node1.getHashId(), true);
+
+        while(!queue.isEmpty()){
+            Node p = queue.remove();
+            if(p.getHashId() == lookingFor){
+                return true;
+            }
+            for(Node n : this.getOutgoingConnectedNodes(p)){ //for-each loop
+                if(!visited.containsKey(n.getHashId()) || !visited.get(n.getHashId())){ //if not in there OR in there and is set to false ?
+                    queue.add(n);
+                    visited.put(n.getHashId(), true);
+                }
+            }
+        }
+        return false;
+    }
+
 
 
 }
