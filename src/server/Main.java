@@ -45,6 +45,8 @@ public class Main {
             String query = br.readLine();
             parseQuery(query, parameters);
 
+            //TODO: after we have parsed the query we can do things ... add/delete/edit the DB!
+
             // send response
             String response = "";
             for (String key : parameters.keySet()) {
