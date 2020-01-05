@@ -10,6 +10,10 @@ things that need to be done
 
 - look into languages vs just api
 
+## server
+
+- finish query functionality
+
 
 ## test
 
