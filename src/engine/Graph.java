@@ -259,7 +259,7 @@ public class Graph {
         this.DFS(this.getNode(node));
     }
 
-    public boolean isPath(Node node1, Node node2){ // for isPath we copied the BFS algorithm
+    public boolean isPath(Node node1, Node node2, String relation){ // for isPath we copied the BFS algorithm
         if(node1 == null || node2 == null){
             return false;
         }
@@ -275,7 +275,7 @@ public class Graph {
             if(p.getHashId() == lookingFor){
                 return true;
             }
-            for(Node n : this.getOutgoingConnectedNodes(p)){ //for-each loop
+            for(Node n : this.getOutgoingConnectedNodes(p, relation)){ //for-each loop
                 if(!visited.containsKey(n.getHashId()) || !visited.get(n.getHashId())){ //if not in there OR in there and is set to false ?
                     queue.add(n);
                     visited.put(n.getHashId(), true);
@@ -285,6 +285,9 @@ public class Graph {
         return false;
     }
 
+    public boolean isPath(Node node1, Node node2) {
+        return this.isPath(node1, node2, null);
+    }
 
 
 }
