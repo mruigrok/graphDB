@@ -22,6 +22,8 @@ public class Main {
         System.out.println("Testing removing vertex:");
         test_removeVertex();
         //can also use test_removeRelation
+        System.out.println("Testing isPath:");
+        test_isPath();
     }
 
     public static Graph createDummyGraph(){
@@ -119,6 +121,42 @@ public class Main {
         }
 
         successMessage();
+    }
+
+    public static void test_isPath(){
+        Graph g = createDummyGraph();
+        if( !g.isPath( g.getNode("Reza"), g.getNode("Callum") ) ){
+            failureMessage("true", "false");
+            return;
+        }
+
+        if( g.isPath( g.getNode("Callum"), g.getNode("Ruify") ) ){
+            failureMessage("false", "true");
+            return;
+        }
+
+        if( !g.isPath( g.getNode("Reza"), g.getNode("Malcolm") ) ){
+            failureMessage("true", "false");
+            return;
+        }
+
+        if( !g.isPath( g.getNode("Reza"), g.getNode("Callum"), "friend" ) ){
+            failureMessage("true", "false");
+            return;
+        }
+
+        if( g.isPath( g.getNode("Callum"), g.getNode("Ruify"), "friend" ) ){
+            failureMessage("false", "true");
+            return;
+        }
+
+        if( g.isPath( g.getNode("Reza"), g.getNode("Malcolm"), "friends" ) ){
+            failureMessage("false", "true");
+            return;
+        }
+
+        successMessage();
+
     }
 
     public static void successMessage(){
