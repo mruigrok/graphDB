@@ -1,9 +1,11 @@
 package test;
 
 import engine.*;
+import org.json.simple.parser.ParseException;
 
 import java.io.FileDescriptor;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.PrintStream;
 //import String.utils;
 
@@ -13,7 +15,7 @@ public class Main {
     public static final String ANSI_RED = "\u001B[31m";
     public static final String ANSI_GREEN = "\u001B[32m";
 
-    public static void main(String [] args){
+    public static void main(String [] args) throws IOException, ParseException {
         System.out.println("Testing the DB!\n\n");
         System.out.println("Testing BFS:");
         test_BFS();
@@ -22,8 +24,9 @@ public class Main {
         System.out.println("Testing removing vertex:");
         test_removeVertex();
         //can also use test_removeRelation
-        System.out.println("Testing isPath:");
-        test_isPath();
+        test_Storage();
+
+
     }
 
     public static Graph createDummyGraph(){
@@ -54,6 +57,17 @@ public class Main {
         return g;
     }
 
+    public static void test_Storage() throws IOException, ParseException {
+        Storage.storeGraphAs(createDummyGraph());
+        Storage b = new Storage();
+        Graph g = b.getGraph();
+        Graph g2 = createDummyGraph();
+        g.printAllNodes();
+        g2.printAllNodes();
+        g.printAllRelationships();
+        g2.printAllRelationships();
+
+    }
     public static void test_BFS(){
         //set io to byte array
         java.io.ByteArrayOutputStream out = new java.io.ByteArrayOutputStream();
@@ -121,42 +135,6 @@ public class Main {
         }
 
         successMessage();
-    }
-
-    public static void test_isPath(){
-        Graph g = createDummyGraph();
-        if( !g.isPath( g.getNode("Reza"), g.getNode("Callum") ) ){
-            failureMessage("true", "false");
-            return;
-        }
-
-        if( g.isPath( g.getNode("Callum"), g.getNode("Ruify") ) ){
-            failureMessage("false", "true");
-            return;
-        }
-
-        if( !g.isPath( g.getNode("Reza"), g.getNode("Malcolm") ) ){
-            failureMessage("true", "false");
-            return;
-        }
-
-        if( !g.isPath( g.getNode("Reza"), g.getNode("Callum"), "friend" ) ){
-            failureMessage("true", "false");
-            return;
-        }
-
-        if( g.isPath( g.getNode("Callum"), g.getNode("Ruify"), "friend" ) ){
-            failureMessage("false", "true");
-            return;
-        }
-
-        if( g.isPath( g.getNode("Reza"), g.getNode("Malcolm"), "friends" ) ){
-            failureMessage("false", "true");
-            return;
-        }
-
-        successMessage();
-
     }
 
     public static void successMessage(){

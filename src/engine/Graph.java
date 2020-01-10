@@ -19,6 +19,16 @@ public class Graph {
         this.relations = new ArrayList<HashMap>();
     }
 
+    public String getName(){
+        return this.name;
+    }
+
+    public void clearGraph(){
+        this.relationKeys.clear();
+        this.relations.clear();
+        this.allNodes.clear();
+    }
+
     public void printAllNodes(){
         for(String i : this.allNodes.keySet()){
             System.out.println(i);
@@ -29,12 +39,55 @@ public class Graph {
 
     public int numberOfVertices(){ return allNodes.size(); }
 
+    public Node getNode(String label){
+        if(allNodes.containsKey(label)){
+            return allNodes.get(label);
+        }
+        else{
+            return null;
+        }
+    }
+
+    public ArrayList<Node> getAllNodesAsArray(){
+        ArrayList<Node> allNodes = new ArrayList<Node>();
+        for(Node i: this.allNodes.values()){
+            allNodes.add(i);
+        }
+        return allNodes;
+    }
+
+    public ArrayList<String> getAllRelationshipKeysAsArray(){
+        ArrayList<String> allRelationKeys = new ArrayList<String>();
+        for(String i : this.relationKeys){
+          allRelationKeys.add(i);
+        }
+        return allRelationKeys;
+    }
+
+    public ArrayList<HashMap> getAllRelations(){
+        return this. relations;
+    }
+
+    public boolean isIn(String label){
+        return allNodes.containsKey(label);
+    }
+
     public void addVertex(String label){
         allNodes.put(label, new Node(label));
     }
 
     public void addVertex(String label, String property){
         allNodes.put(label, new Node(label, property));
+    }
+
+    public void addVertex(String label, String property, String hashID){
+        allNodes.put(label, new Node(label, property, hashID));
+    }
+
+    public void addVertexWithHashID(String hashID, String label){
+        Node newNode = new Node(label);
+        newNode.setHashId(hashID);
+        this.allNodes.put(label, newNode);
     }
 
     public void removeVertex(Node vertex){
@@ -64,6 +117,29 @@ public class Graph {
         }
     }
 
+    public void addRelation(String node1, String node2, String relation){
+        //error check
+        if(!this.allNodes.containsKey(node1) ) {
+            System.err.println("err: couldnt find: " + node1);
+            return;
+        }
+        if(!this.allNodes.containsKey(node2)){
+            System.err.println("err: couldnt find: " + node2);
+            return;
+        }
+        //create relationKey
+        String relationKey = node1+relation+node2;
+        //add to set of relationKeys
+        this.relationKeys.add(relationKey);
+        HashMap<String, String> properties = new HashMap<String, String>();
+        properties.put("~relation~", relation);
+        properties.put("~node1~", node1);
+        properties.put("~node2~", node2);
+        properties.put("~id~", relationKey);
+        //add to set of relations
+        this.relations.add(properties);
+    }
+
     public void removeRelation(Node node1,Node node2, String relation){
         this.removeRelation(node1.getLabel(), node2.getLabel(), relation);
     }
@@ -89,30 +165,6 @@ public class Graph {
             }
         }
         System.out.println("err: couldn't find node-relationship pair");
-    }
-
-
-    public void addRelation(String node1, String node2, String relation){
-        //error check
-        if(!this.allNodes.containsKey(node1) ) {
-            System.err.println("err: couldnt find: " + node1);
-            return;
-        }
-        if(!this.allNodes.containsKey(node2)){
-            System.err.println("err: couldnt find: " + node2);
-            return;
-        }
-        //create relationKey
-        String relationKey = node1+relation+node2;
-        //add to set of relationKeys
-        this.relationKeys.add(relationKey);
-        HashMap<String, String> properties = new HashMap<String, String>();
-        properties.put("~relation~", relation);
-        properties.put("~node1~", node1);
-        properties.put("~node2~", node2);
-        properties.put("~id~", relationKey);
-        //add to set of relations
-        this.relations.add(properties);
     }
 
     public boolean isRelation(String key){
@@ -157,19 +209,6 @@ public class Graph {
     public void updateRelation(String node1, String node2, String oldRelation, String newRelation){
         removeRelation(node1, node2, oldRelation);
         addRelation(node1, node2, newRelation);
-    }
-
-    public Node getNode(String label){
-        if(allNodes.containsKey(label)){
-            return allNodes.get(label);
-        }
-        else{
-            return null;
-        }
-    }
-
-    public boolean isIn(String label){
-        return allNodes.containsKey(label);
     }
 
     public ArrayList<Node> getOutgoingConnectedNodes(Node node, String relation){
@@ -290,4 +329,4 @@ public class Graph {
     }
 
 
-}
+}//end of Graph class

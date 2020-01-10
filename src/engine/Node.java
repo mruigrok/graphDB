@@ -12,6 +12,12 @@ public class Node {
         this.hashId = UUID.randomUUID().toString();
     }
 
+    public static Node createWithHashId(String hashId) {
+        Node newNode =  new Node();
+        newNode.hashId = hashId;
+        return newNode;
+    }
+
     //static method belonging to class not individual object
     public static Node createWithLabel(String label){
         Node newNode = new Node();
@@ -39,6 +45,14 @@ public class Node {
         this.hashId = UUID.randomUUID().toString();
     }
 
+    public Node(String label, String properties, String hashId){
+        this.label = label;
+        this.properties = properties;
+        this.hashId = hashId;
+    }
+
+    public void setHashId(String hashId){this.hashId = hashId;};
+
     public String getLabel() {
         return label;
     }
@@ -63,4 +77,4 @@ public class Node {
         this.properties = properties;
     }
 
-}
+}//end of Node class
