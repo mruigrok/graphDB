@@ -155,6 +155,7 @@ public class Graph {
     }
 
     public void updateRelation(String node1, String node2, String oldRelation, String newRelation){
+        //TODO: optimize this
         removeRelation(node1, node2, oldRelation);
         addRelation(node1, node2, newRelation);
     }

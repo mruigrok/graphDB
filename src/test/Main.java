@@ -24,6 +24,8 @@ public class Main {
         //can also use test_removeRelation
         System.out.println("Testing isPath:");
         test_isPath();
+        System.out.println("Testing fucking around:");
+        fucking_around();
     }
 
     public static Graph createDummyGraph(){
@@ -52,6 +54,13 @@ public class Main {
         g.addRelation("Brad", "Eric", "friend");
 
         return g;
+    }
+
+
+    public static void fucking_around(){
+        Graph g = createDummyGraph();
+        g.addVertex("Reza");
+        g.printAllNodes();
     }
 
     public static void test_BFS(){

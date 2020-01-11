@@ -11,12 +11,17 @@ import java.util.Map;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpServer;
+import engine.Engine;
+import query.Query;
 
 public class Main {
     public static void main(String [] args) throws IOException {
         //here we need to boot a server, both HTTP and socket connections!!! similar to postgres / DB2 consoles for example!
         System.out.println("Booting server!");
 
+        Engine.initialize();
+
+        //initialize HTTP server
         HttpServer server = HttpServer.create(new InetSocketAddress(12544), 0);
         server.createContext("/test", new TestDB());
         server.createContext("/query", new QueryDB()); // for now this echos back the values given by the user
@@ -27,7 +32,7 @@ public class Main {
     static class TestDB implements HttpHandler {
         @Override
         public void handle(HttpExchange t) throws IOException {
-            String response = "This is the test response!";
+            String response = "This is the test response! -  Ruify";
             t.sendResponseHeaders(200, response.length());
             OutputStream os = t.getResponseBody();
             os.write(response.getBytes());
@@ -45,17 +50,31 @@ public class Main {
             String query = br.readLine();
             parseQuery(query, parameters);
 
-            //TODO: after we have parsed the query we can do things ... add/delete/edit the DB!
+            if( parameters.containsKey("query") ){ //just a quick sanity check
+                if(Query.executeQuery(parameters)){
+                    // send response
+                    String response = "";
+                    for (String key : parameters.keySet()) {
+                        response += key + " => " + parameters.get(key) + "\n";
+                    }
+                    t.sendResponseHeaders(200, response.length());
+                    OutputStream os = t.getResponseBody();
+                    os.write(response.toString().getBytes());
+                    os.close();
+                }
+                else{
+                    // send response
+                    System.out.println("error - no good");
+                    String response = "no good";
+                    t.sendResponseHeaders(500, response.length());
+                    OutputStream os = t.getResponseBody();
+                    os.write(response.toString().getBytes());
+                    os.close();
+                }
+            }else{
+                //throw an error
 
-            // send response
-            String response = "";
-            for (String key : parameters.keySet()) {
-                response += key + " = " + parameters.get(key) + "\n";
             }
-            t.sendResponseHeaders(200, response.length());
-            OutputStream os = t.getResponseBody();
-            os.write(response.toString().getBytes());
-            os.close();
         }
 
         public static void parseQuery(String query, Map<String, Object> parameters) throws UnsupportedEncodingException {
