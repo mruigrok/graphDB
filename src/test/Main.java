@@ -24,8 +24,10 @@ public class Main {
         System.out.println("Testing removing vertex:");
         test_removeVertex();
         //can also use test_removeRelation
+        System.out.println("Testing storage:");
         test_Storage();
-
+        System.out.println("Testing isPath:");
+        test_isPath();
 
     }
 
@@ -68,6 +70,7 @@ public class Main {
         g2.printAllRelationships();
 
     }
+
     public static void test_BFS(){
         //set io to byte array
         java.io.ByteArrayOutputStream out = new java.io.ByteArrayOutputStream();
