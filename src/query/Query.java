@@ -1,7 +1,6 @@
 package query;
 
 import engine.*;
-
 import java.util.HashMap;
 
 public class Query {

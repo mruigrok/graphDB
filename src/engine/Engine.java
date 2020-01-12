@@ -1,7 +1,7 @@
 package engine;
 
 import java.util.HashMap;
-import engine.Graph;
+import engine.*;
 
 public class Engine {
     private static HashMap<String, Graph> graphs = new HashMap<String, Graph>();

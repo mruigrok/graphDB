@@ -2,18 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c7a7eb78-d629-4593-af10-d8dd048a1327" name="Default Changelist" comment="updated remove vertex">
-      <change afterPath="$PROJECT_DIR$/src/query/Parser.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/json_simple_1_1_2.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/graphDB.iml" beforeDir="false" afterPath="$PROJECT_DIR$/graphDB.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/Graph.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/Graph.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/engine/Node.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/Node.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/Main.java" afterDir="false" />
-=======
+      <change beforePath="$PROJECT_DIR$/out/production/graphDB/META-INF/graphDB.kotlin_module" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/engine/Engine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/engine/Engine.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/engine/Main.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/query/Parser.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/query/Query.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/query/Query.java" afterDir="false" />
->>>>>>> language
+      <change beforePath="$PROJECT_DIR$/src/test/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,9 +47,6 @@
     <property name="project.structure.side.proportion" value="0.0" />
     <property name="settings.editor.selected.configurable" value="preferences.pathVariables" />
   </component>
-<<<<<<< HEAD
-  <component name="RunManager" selected="Application.Test">
-=======
   <component name="RunDashboard">
     <option name="ruleStates">
       <list>
@@ -66,12 +60,9 @@
     </option>
   </component>
   <component name="RunManager" selected="Application.Server">
->>>>>>> language
-    <configuration name="Engine" type="Application" factoryName="Application" temporary="true">
-      <option name="MAIN_CLASS_NAME" value="engine.Main" />
+    <configuration name="Server" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="server.Main" />
       <module name="graphDB" />
-      <RunnerSettings RunnerId="Run" />
-      <ConfigurationWrapper RunnerId="Run" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -83,35 +74,10 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Test1" type="Application" factoryName="Application">
-      <option name="MAIN_CLASS_NAME" value="test.Main" />
-      <module name="graphDB" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <list>
       <item itemvalue="Application.Test" />
-      <item itemvalue="Application.Test1" />
-      <item itemvalue="Application.Engine" />
+      <item itemvalue="Application.Server" />
     </list>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Application.Engine" />
-      </list>
-    </recent_temporary>
-  </component>
-  <component name="ServiceViewManager">
-    <option name="viewStates">
-      <list>
-        <serviceView>
-          <treeState>
-            <expand />
-            <select />
-          </treeState>
-        </serviceView>
-      </list>
-    </option>
   </component>
   <component name="SvnConfiguration">
     <configuration />
