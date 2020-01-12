@@ -1,5 +1,11 @@
 package server;
 
+import com.sun.net.httpserver.HttpExchange;
+import com.sun.net.httpserver.HttpHandler;
+import com.sun.net.httpserver.HttpServer;
+import engine.Engine;
+import query.Query;
+
 import java.io.*;
 import java.net.InetSocketAddress;
 import java.net.URLDecoder;
@@ -7,12 +13,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import com.sun.net.httpserver.HttpExchange;
-import com.sun.net.httpserver.HttpHandler;
-import com.sun.net.httpserver.HttpServer;
-import engine.Engine;
-import query.Query;
 
 public class Main {
     public static void main(String [] args) throws IOException {
@@ -64,8 +64,8 @@ public class Main {
                 }
                 else{
                     // send response
-                    System.out.println("error - no good");
-                    String response = "no good";
+                    System.out.println("error - missing fields");
+                    String response = "missing fields";
                     t.sendResponseHeaders(500, response.length());
                     OutputStream os = t.getResponseBody();
                     os.write(response.toString().getBytes());
@@ -73,7 +73,12 @@ public class Main {
                 }
             }else{
                 //throw an error
-
+                System.out.println("error - no query");
+                String response = "no query";
+                t.sendResponseHeaders(500, response.length());
+                OutputStream os = t.getResponseBody();
+                os.write(response.toString().getBytes());
+                os.close();
             }
         }
 

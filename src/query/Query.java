@@ -38,7 +38,7 @@ public class Query {
                 case "delete":
                     g = Engine.getGraph(parameters.get("graph").toString());
                     g.removeVertex(
-                        parameters.get("name").toString()
+                        parameters.get("label").toString()
                     );
                     break;
                 case "update node":
@@ -80,7 +80,7 @@ public class Query {
         }
         else{
             //throw error
-            System.out.println("helloyooodjkERRORandk");
+            System.out.println("Should throw an exception HERE!!!! - TODO");
             return false;
         }
         return true;
@@ -98,33 +98,41 @@ public class Query {
         }
         switch(parameters.get("query").toString().toLowerCase()) {
             case "insert":
+            case "delete":
                 //for inserts we need to check if there is a name
                 if(!parameters.containsKey("label") ){
                     return false;
                 }
                 break;
             case "add relation":
-                //TODO:
-
-                break;
             case "remove relation":
-
-                break;
-            case "delete":
-
+                if(!parameters.containsKey("from") || !parameters.containsKey("to") || !parameters.containsKey("relation")){
+                    return false;
+                }
                 break;
             case "update node":
-
+                if(!parameters.containsKey("label")){
+                    return false;
+                }
+                if(!parameters.containsKey("newLabel") && !parameters.containsKey("newProperties")){
+                    return false;
+                }
                 break;
             case "update relation":
-
+                if(!parameters.containsKey("from") || !parameters.containsKey("to") || !parameters.containsKey("oldRelation") || !parameters.containsKey("newRelation")){
+                    return false;
+                }
                 break;
             case "create graph":
-                break;
             case "drop graph":
+                //redundant check, will leave this for now
+                if(!parameters.containsKey("graph")){
+                    return false;
+                }
                 break;
             case "find":
                 //TODO: lots of work here
+                //we need some traversal language ??, create our own
                 break;
             default:
                 // code block
