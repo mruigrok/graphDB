@@ -65,7 +65,7 @@ public class Graph {
     }
 
     public ArrayList<HashMap> getAllRelations(){
-        return this. relations;
+        return this.relations;
     }
 
     public boolean isIn(String label){
@@ -207,9 +207,22 @@ public class Graph {
     }
 
     public void updateRelation(String node1, String node2, String oldRelation, String newRelation){
-        //TODO: optimize this
-        removeRelation(node1, node2, oldRelation);
-        addRelation(node1, node2, newRelation);
+        String oldRelationKey = node1 + oldRelation + node2;
+        if(isRelation(oldRelationKey)){
+            //the relation exists
+            String newRelationKey = node1 + newRelation + node2;
+            for(HashMap<String, String> hm : this.relations){
+                if(hm.get("~id~").equals(oldRelationKey)){
+                    hm.put("~id~", newRelationKey);
+                    hm.put("~relation~", newRelation);
+                }
+            }
+            this.relationKeys.remove(oldRelationKey);
+            this.relationKeys.add(newRelationKey);
+        }
+        else{
+            //prompt user that no old relation exists. Ask if they want to create a new one??
+        }
     }
 
     public ArrayList<Node> getOutgoingConnectedNodes(Node node, String relation){

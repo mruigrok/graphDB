@@ -14,8 +14,7 @@ public class Query {
                     g = Engine.getGraph(parameters.get("graph").toString());
                     g.addVertex(
                             parameters.get("label").toString(),
-                            parameters.containsKey("properties") == true ? parameters.get("properties").toString() : ""
-                    );
+                            parameters.containsKey("properties") == true ? parameters.get("properties").toString() : "");
                     break;
                 case "add relation":
                     //grab the graph

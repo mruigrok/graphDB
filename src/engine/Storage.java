@@ -28,7 +28,6 @@ public class Storage {
     }
 
     //Storage.storeGraphAs(Graph g);
-
     public static void storeGraphAs(Graph graphToStore){
         //have proper error handling
         Storage graphStorage = new Storage();
@@ -108,6 +107,7 @@ public class Storage {
 
     public Graph getGraph() throws IOException, ParseException {
         //go to specific users file on record and look for their stored db's
+        //TODO: Correct filenames
        return this.getGraphFromJson("test1.json");
     }
 
@@ -157,11 +157,13 @@ public class Storage {
         String content = new String(Files.readAllBytes(path));
         System.out.println(content);
 
+        //converting String to JSON object
         JSONParser parser = new JSONParser();
-        JSONObject json = (JSONObject) parser.parse(content);
-        JSONArray nodes = (JSONArray) json.get("nodes");
-        JSONArray relations = (JSONArray) json.get("relations");
+        JSONObject jsonObj = (JSONObject) parser.parse(content);
+        JSONArray nodes = (JSONArray) jsonObj.get("nodes");
+        JSONArray relations = (JSONArray) jsonObj.get("relations");
 
+        //might have to get another name for the graph name
         Graph g = new Graph(JSONfilename);
 
         //adding the nodes
@@ -177,6 +179,7 @@ public class Storage {
             JSONObject j = (JSONObject)iterator.next();
             g.addRelation(j.get("node1").toString(), j.get("node2").toString(), j.get("relation").toString());
         }
+
         return g;
     }
 

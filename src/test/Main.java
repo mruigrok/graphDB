@@ -24,10 +24,9 @@ public class Main {
         System.out.println("Testing removing vertex:");
         test_removeVertex();
         //can also use test_removeRelation
-        System.out.println("Testing storage:");
-        //test_Storage();
-        System.out.println("Testing isPath:");
-        test_isPath();
+        test_Storage();
+
+
 
     }
 
@@ -70,7 +69,6 @@ public class Main {
         g2.printAllRelationships();
 
     }
-
     public static void test_BFS(){
         //set io to byte array
         java.io.ByteArrayOutputStream out = new java.io.ByteArrayOutputStream();
@@ -122,6 +120,7 @@ public class Main {
         g.updateRelation("Reza", "Callum", "friend", "buddies");
         g.updateRelation(g.getNode("Reza"), g.getNode("Callum"), "buddies", "enemy");
 
+
         if( g.isIn("Raccoon") || g.isIn("Eric") || g.isIn("Malcolm")){ // these should all be false
             failureMessage("", "Raccoon or Eric or Malcolm in graph!");
             return;
@@ -138,42 +137,6 @@ public class Main {
         }
 
         successMessage();
-    }
-
-    public static void test_isPath(){
-        Graph g = createDummyGraph();
-        if( !g.isPath( g.getNode("Reza"), g.getNode("Callum") ) ){
-            failureMessage("true", "false");
-            return;
-        }
-
-        if( g.isPath( g.getNode("Callum"), g.getNode("Ruify") ) ){
-            failureMessage("false", "true");
-            return;
-        }
-
-        if( !g.isPath( g.getNode("Reza"), g.getNode("Malcolm") ) ){
-            failureMessage("true", "false");
-            return;
-        }
-
-        if( !g.isPath( g.getNode("Reza"), g.getNode("Callum"), "friend" ) ){
-            failureMessage("true", "false");
-            return;
-        }
-
-        if( g.isPath( g.getNode("Callum"), g.getNode("Ruify"), "friend" ) ){
-            failureMessage("false", "true");
-            return;
-        }
-
-        if( g.isPath( g.getNode("Reza"), g.getNode("Malcolm"), "friends" ) ){
-            failureMessage("false", "true");
-            return;
-        }
-
-        successMessage();
-
     }
 
     public static void successMessage(){
