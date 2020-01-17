@@ -22,100 +22,37 @@ public class Storage {
     //ensure the name is a valid filename (no illegal characters etc.), maybe in graph class we can do this
     private String fileName;                //where the file will be saved. Potentially by the user and graph name
     private String storageType = ".json";    //How the data is stored is not relevant to user, just developer. Can change as seen fit
-    
+    private String userDirectory = "";      //where it will be stored on the users device
+
     public Storage(){
         //constructor
-    }
-
-    //Storage.storeGraphAs(Graph g);
-    public static void storeGraphAs(Graph graphToStore){
-        //have proper error handling
-        Storage graphStorage = new Storage();
-        graphStorage.setFileName(graphToStore.getName());
-        graphStorage.saveGraph(graphToStore);
-
     }
 
     public void setFileName(String name){
         this.fileName = name;
     }
 
+    public static void storeGraphAs(Graph graphToStore){
+        //have proper error handling
+        Storage graphStorage = new Storage();
+        graphStorage.setFileName(graphToStore.getName());
+        graphStorage.saveGraph(graphToStore);
+    }
+
     private void saveGraph(Graph g){
         switch (this.storageType) {
             case ".json":
-                saveGraphAsJson(g);
+                writeStringtoFile(convertGraphtoJsonString(g), g);
                 break;
             case ".txt":
-                saveGraphAsTxt(g);
+                writeStringtoFile(convertGraphtoJsonString(g), g);
                 break;
             default:
                 throw new IllegalStateException("Unexpected value: " + this.storageType);
         }
     }
 
-    private void saveGraphAsTxt(Graph g){
-        //Save the graph as a txt file
-        //Need to create or look for a folder of the user's db's
-        String directory = "C:\\graphDB Storage\\"; //need to correct for different devices
-        //this is where the username of the user would be used
-        //path += "username\\" + this.fileName + ".txt";
-        String dataToWrite = "||";
-        for (Node n: g.getAllNodesAsArray()){
-            dataToWrite += "|" + n.getHashId() + "|" + n.getLabel() + "|";
-        }
-        dataToWrite += "|";
-        for(String s : g.getAllRelationshipKeysAsArray()){
-            dataToWrite+= "|" + s + "|";
-        }
-        //String directory = System.getProperty("user.home");
-        String fileName = g.getName()+ ".txt";
-
-        Path path = Paths.get(directory, fileName);
-
-        try {
-            Files.write(path, dataToWrite.getBytes(), StandardOpenOption.CREATE);
-        } catch (IOException e) {
-            // exception handling
-        }
-
-    }
-
-    private Graph getGraphFromTxt(String directory) {
-        //grab data from .txt file and build the graph for a specific user
-        Path path = Paths.get(directory, "test1.txt");
-        List<String> list = null;
-        try {
-            list = Files.readAllLines(path);
-            list.forEach(line -> System.out.println(line));
-            list.toString();
-            System.out.println(list);
-        } catch (IOException e) {
-            // exception handling
-        }
-        String graphData = null;
-        for (String st : list) {
-            graphData += st;
-        }
-
-        //for(Character c : graphData){ }
-
-        Graph g = new Graph("G2");
-
-        return g;
-    }
-
-
-    public Graph getGraph() throws IOException, ParseException {
-        //go to specific users file on record and look for their stored db's
-        //TODO: Correct filenames
-       return this.getGraphFromJson("test1.json");
-    }
-
-    private void saveGraphAsJson(Graph g){
-        //save as a JSON file
-        String directory = "C:\\graphDB Storage\\";
-        String filename =  g.getName() + this.storageType;
-
+    private String convertGraphtoJsonString(Graph g){
         //adding the nodes
         JSONObject graphData = new JSONObject();
         JSONArray nodes = new JSONArray();
@@ -140,17 +77,10 @@ public class Storage {
         }
         graphData.put("relations", relations);
 
-        //write to file
-        Path path = Paths.get(directory, filename);
-        try {
-            Files.write(path, graphData.toJSONString().getBytes(), StandardOpenOption.CREATE);
-        } catch (IOException e) {
-            // exception handling
-        }
-
+        return graphData.toJSONString();
     }
 
-    private Graph getGraphFromJson(String JSONfilename) throws IOException, ParseException {
+    private Graph getGraphFromJsonFormat(String JSONfilename) throws IOException, ParseException {
         //TODO: Find correct directory for the json file
         String directory = "C:\\graphDB Storage\\";
         Path path = Paths.get(directory, JSONfilename);
@@ -179,9 +109,30 @@ public class Storage {
             JSONObject j = (JSONObject)iterator.next();
             g.addRelation(j.get("node1").toString(), j.get("node2").toString(), j.get("relation").toString());
         }
-
         return g;
     }
+
+    private void writeStringtoFile(String toWrite, Graph g){
+        //save as a JSON file, this is temporary
+        String directory = "C:\\graphDB Storage\\";
+        String filename =  g.getName() + this.storageType;
+
+        //write to file
+        Path path = Paths.get(directory, filename);
+        try {
+            Files.write(path, toWrite.getBytes(), StandardOpenOption.CREATE);
+        } catch (IOException e) {
+            // exception handling
+        }
+    }
+
+    public Graph getGraph() throws IOException, ParseException {
+        //go to specific users file on record and look for their stored db's
+        //TODO: Correct filenames
+        return this.getGraphFromJsonFormat("test1.txt");
+    }
+
+
 
 
 }
