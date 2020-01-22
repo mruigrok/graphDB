@@ -13,7 +13,6 @@ import java.nio.file.StandardOpenOption;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-//import org.json.simple.*;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
@@ -82,10 +81,10 @@ public class Storage {
 
     private Graph getGraphFromJsonFormat(String JSONfilename) throws IOException, ParseException {
         //TODO: Find correct directory for the json file
-        String directory = "C:\\graphDB Storage\\";
+        String directory = System.getProperty("user.home");
+        directory += "\\graphDBstorage";
         Path path = Paths.get(directory, JSONfilename);
         String content = new String(Files.readAllBytes(path));
-        System.out.println(content);
 
         //converting String to JSON object
         JSONParser parser = new JSONParser();
@@ -112,15 +111,17 @@ public class Storage {
         return g;
     }
 
-    private void writeStringtoFile(String toWrite, Graph g){
+    private void writeStringtoFile(String content, Graph g){
         //save as a JSON file, this is temporary
-        String directory = "C:\\graphDB Storage\\";
+        //TODO:Finding user directories  depending on the project they are working on
+        String directory = System.getProperty("user.home");
+        directory += "\\graphDBstorage";
         String filename =  g.getName() + this.storageType;
 
         //write to file
         Path path = Paths.get(directory, filename);
         try {
-            Files.write(path, toWrite.getBytes(), StandardOpenOption.CREATE);
+            Files.write(path, content.getBytes(), StandardOpenOption.CREATE);
         } catch (IOException e) {
             // exception handling
         }
@@ -129,7 +130,24 @@ public class Storage {
     public Graph getGraph() throws IOException, ParseException {
         //go to specific users file on record and look for their stored db's
         //TODO: Correct filenames
-        return this.getGraphFromJsonFormat("test1.txt");
+        return this.getGraphFromJsonFormat("test1.json");
+    }
+
+    //function to create a directory in the users home
+    public void createDirectory(){
+        System.out.println("Enter the name of the new directory: ");
+        Scanner scan = new Scanner(System.in);
+        Path dir = Paths.get(System.getProperty("user.home") + "\\" + scan.next());
+
+        if(!Files.exists(dir)){
+            try{
+                //create the directory
+                Files.createDirectory(dir);
+            }catch(IOException e){
+                //print the error
+                e.printStackTrace();
+            }
+        }
     }
 
 

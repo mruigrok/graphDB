@@ -7,6 +7,7 @@ import java.io.FileDescriptor;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
+import java.util.ArrayList;
 //import String.utils;
 
 public class Main {
@@ -21,12 +22,11 @@ public class Main {
         test_BFS();
         System.out.println("Testing DFS:");
         test_DFS();
-        System.out.println("Testing removing vertex:");
-        test_removeVertex();
+        //System.out.println("Testing removing vertex:");
+        //test_removeVertex();
         //can also use test_removeRelation
+        System.out.println("Testing graph reproduction:");
         test_Storage();
-
-
 
     }
 
@@ -58,16 +58,25 @@ public class Main {
         return g;
     }
 
+    public static String test_userHome(){
+        return System.getProperty("user.home");
+    }
+
     public static void test_Storage() throws IOException, ParseException {
         Storage.storeGraphAs(createDummyGraph());
         Storage b = new Storage();
         Graph g = b.getGraph();
         Graph g2 = createDummyGraph();
-        g.printAllNodes();
-        g2.printAllNodes();
-        g.printAllRelationships();
-        g2.printAllRelationships();
 
+        ArrayList<String> relations = g.getAllRelationshipKeysAsArray();
+        ArrayList<String> relations2 = g2.getAllRelationshipKeysAsArray();
+        for(String s : relations){
+            if(!relations2.contains(s)){
+               failureMessage(relations.toString(), relations2.toString());
+                return;
+           }
+        }
+        successMessage();
     }
     public static void test_BFS(){
         //set io to byte array
