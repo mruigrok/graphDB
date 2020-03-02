@@ -7,7 +7,7 @@ public class Node {
     private String label = ""; // a label for the node, hardcoded to a string for now, this can be variable
     private String properties = ""; // a property/data for the node, again hardcoded as string and will change in future
 
-    //constructor
+    /*Static constructors*/
     public Node(){
         this.hashId = UUID.randomUUID().toString();
     }
@@ -18,14 +18,12 @@ public class Node {
         return newNode;
     }
 
-    //static method belonging to class not individual object
     public static Node createWithLabel(String label){
         Node newNode = new Node();
         newNode.setLabel(label);
         return newNode;
     }
 
-    //static method belonging to class not individual object
     public static Node createWithLabelandProperties(String label, String properties){
         Node newNode = new Node();
         newNode.setLabel(label);
@@ -33,7 +31,7 @@ public class Node {
         return newNode;
     }
 
-    //keep these? Or use the previous createNode functions? Or both?
+    /*Constructors*/
     public Node(String label) {
         this.label = label;
         this.hashId = UUID.randomUUID().toString();
@@ -51,8 +49,6 @@ public class Node {
         this.hashId = hashId;
     }
 
-    public void setHashId(String hashId){this.hashId = hashId;};
-
     public String getLabel() {
         return label;
     }
@@ -65,9 +61,17 @@ public class Node {
         return properties;
     }
 
-    public void setLabel(String label){ this.label = label;}
+    public void setHashId(String hashId){
+        this.hashId = hashId;
+    }
 
-    public void setProperties(String properties){ this.properties = properties;}
+    public void setLabel(String label){
+        this.label = label;
+    }
+
+    public void setProperties(String properties){
+        this.properties = properties;
+    }
 
     public void updateLabel(String label) {
         this.label = label;

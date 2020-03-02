@@ -5,6 +5,12 @@ import engine.Node;
 import java.lang.reflect.Array;
 import java.util.*;
 
+/*Authors:
+* Reza Shariari
+* Matthew Ruigrok
+* */
+
+//TODO:Make sure nodes can have relationships with themselves i.e. node1 + relation + node1
 public class Graph {
 
     private HashMap<String, Node> allNodes;
@@ -90,10 +96,13 @@ public class Graph {
         this.allNodes.put(label, newNode);
     }
 
+    /*Remove the vertex from the graph. Can pass a node or string as variable*/
     public void removeVertex(Node vertex){
         if(vertex == null){
             System.out.println("err: can't find vertex");
-        }else{this.removeVertex(vertex.getLabel());}
+        }else{
+            this.removeVertex(vertex.getLabel());
+        }
     }
 
     public void removeVertex(String vertex){
@@ -117,14 +126,84 @@ public class Graph {
         }
     }
 
+    public void updateVertexLabel(Node vertex, String newLabel){
+        this.updateVertexLabel(vertex.getLabel(), newLabel);
+    }
+
+    public void updateVertexLabel(String vertex, String newLabel){
+        if(vertex.equals(newLabel)){
+            //Same label, nothing to be done
+            return;
+        }
+        if(allNodes.containsKey(vertex)){
+            /*Get old node and update label*/
+            Node newVertex = getNode(vertex);
+            newVertex.updateLabel(newLabel);
+            allNodes.remove(vertex);
+            allNodes.put(newLabel, newVertex);
+            String newKey = "";
+
+            for(HashMap<String, String> hm : this.relations){
+                if(hm.get("~node1~").equals(vertex)){
+                    if(hm.get("~node2~").equals(vertex)){
+                        //relationship to itself
+                        newKey = newLabel + hm.get("~relation~") + newLabel;
+                        hm.put("~node1~", newLabel);
+                        hm.put("~node2~", newLabel);
+                        relationKeys.remove(hm.get("~id~"));
+                        relationKeys.add(newKey);
+                        hm.put("~id~", newKey);
+                    }
+                    else {
+                        //relation to another node
+                        newKey = newLabel + hm.get("~relation~") + hm.get("~node2~");
+                        hm.put("~node1~", newLabel);
+                        relationKeys.remove(hm.get("~id~"));
+                        relationKeys.add(newKey);
+                        hm.put("~id~", newKey);
+                    }
+                }
+                else if(hm.get("~node2~").equals(vertex)){
+                    //2nd node in the relationship
+                    newKey = hm.get("~node1~") + hm.get("~relation~") + newLabel;
+                    hm.put("~node2~", newLabel);
+                    relationKeys.remove(hm.get("~id~"));
+                    relationKeys.add(newKey);
+                    hm.put("~id~", newKey);
+                }
+            }
+        }
+        else{
+            //Vertex is not in graph
+            System.out.println("err: can't find vertex");
+        }
+    }
+
+    /*Update the property of the vertex*/
+    public void updateVertexProperty(String vertex, String property){
+        /*As of now property is only used at the node level
+        * so only that has to be accounted for*/
+        if(allNodes.containsKey(vertex)){
+            getNode(vertex).updateProperties(property);
+        }
+        else{
+            System.out.println("err: can't find vertex");
+        }
+    }
+
+    /*Add a relationship between node 1 and node 2. Can pass a node or string as parameters*/
+    public void addRelation(Node node1, Node node2, String relation){
+        this.addRelation(node1.getLabel(), node2.getLabel(), relation);
+    }
+
     public void addRelation(String node1, String node2, String relation){
         //error check
         if(!this.allNodes.containsKey(node1) ) {
-            System.err.println("err: couldnt find: " + node1);
+            System.err.println("err: couldn't find: " + node1);
             return;
         }
         if(!this.allNodes.containsKey(node2)){
-            System.err.println("err: couldnt find: " + node2);
+            System.err.println("err: couldn't find: " + node2);
             return;
         }
         //create relationKey
@@ -140,7 +219,8 @@ public class Graph {
         this.relations.add(properties);
     }
 
-    public void removeRelation(Node node1,Node node2, String relation){
+    /*Remove a relationship between node 1 and node 2. Can pass a node or string as parameters*/
+    public void removeRelation(Node node1, Node node2, String relation){
         this.removeRelation(node1.getLabel(), node2.getLabel(), relation);
     }
 
@@ -167,10 +247,12 @@ public class Graph {
         System.out.println("err: couldn't find node-relationship pair");
     }
 
+    /*Check if a relationKey between two nodes exists*/
     public boolean isRelation(String key){
         return relationKeys.contains(key);
     }
 
+    /*Find all of the relationships between node 1 and node 2 and return the list*/
     public ArrayList<String> findRelations(String node1, String node2){
         //find all the relationships in the direction of node 1 to node 2
         ArrayList<String> relations = new ArrayList<String>();
@@ -182,6 +264,7 @@ public class Graph {
         return relations;
     }
 
+    /*Find the outgoing relationships from a node to any other and return array*/
     public ArrayList<String> findOutgoingRelations(String node1){
         ArrayList<String> outgoingRelations = new ArrayList<String>();
         for(HashMap<String, String> r : this.relations){
@@ -192,6 +275,7 @@ public class Graph {
         return outgoingRelations;
     }
 
+    /*Find all the incoming relationships to a node and return array*/
     public ArrayList<String> findIncomingRelations(String node1) {
         ArrayList<String> incomingRelations = new ArrayList<String>();
         for(HashMap<String, String> r : this.relations){
@@ -202,6 +286,7 @@ public class Graph {
         return incomingRelations;
     }
 
+    /*Update an existing relationship between node 1 and node 2 with a new one */
     public void updateRelation(Node node1, Node node2, String oldRelation, String newRelation){
         this.updateRelation(node1.getLabel(), node2.getLabel(), oldRelation, newRelation);
     }
@@ -221,10 +306,11 @@ public class Graph {
             this.relationKeys.add(newRelationKey);
         }
         else{
-            //prompt user that no old relation exists. Ask if they want to create a new one??
+            System.out.println("error: no relationship exists");
         }
     }
 
+    /*Get all outgoing connected nodes with that relation. Null relation for all*/
     public ArrayList<Node> getOutgoingConnectedNodes(Node node, String relation){
         String label = node.getLabel();
         ArrayList<Node> connections = new ArrayList<Node>();
@@ -268,7 +354,6 @@ public class Graph {
     // Breadth - First - Search
     public void BFS(Node node){ // this function is static as it technically does not belong to Graph class (for now)
         //our visited map  //TODO: this does not fucking scale well lmao
-
         HashMap<String, Boolean> visited = new HashMap<>();
         Queue<Node> queue = new LinkedList<Node>();
         queue.add(node);
@@ -305,7 +390,6 @@ public class Graph {
                 DFSUtil(n, visited);
             }
         }
-
     }
 
     public void DFS(String node){

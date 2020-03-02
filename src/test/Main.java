@@ -3,11 +3,13 @@ package test;
 import engine.*;
 import org.json.simple.parser.ParseException;
 
+import java.awt.image.AreaAveragingScaleFilter;
 import java.io.FileDescriptor;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 //import String.utils;
 
 public class Main {
@@ -18,21 +20,27 @@ public class Main {
 
     public static void main(String [] args) throws IOException, ParseException {
         System.out.println("Testing the DB!\n\n");
+        /*
         System.out.println("Testing BFS:");
         test_BFS();
         System.out.println("Testing DFS:");
         test_DFS();
-        //System.out.println("Testing removing vertex:");
-        //test_removeVertex();
+        System.out.println("Testing removing vertex:");
+        test_removeVertex();
         //can also use test_removeRelation
+         */
         System.out.println("Testing graph reproduction:");
         test_Storage();
+        /*
+        System.out.println("Testing update label:");
+        test_updateVertex();
+         */
 
     }
 
-    public static Graph createDummyGraph(){
+    public static Graph createDummyGraph(String name){
         //create new graphs, with vertices and relationships
-        Graph g = new Graph("test1");
+        Graph g = new Graph(name);
 
         g.addVertex("Reza");
         g.addVertex("Ruify");
@@ -58,17 +66,43 @@ public class Main {
         return g;
     }
 
-    public static String test_userHome(){
-        return System.getProperty("user.home");
+    public static void test_updateVertex(){
+
+        Graph g = createDummyGraph("test");
+        g.updateVertexLabel("Stinky", "Edgar");
+        ArrayList<HashMap> r = g.getAllRelations();
+
+        if(!(g.isIn("Edgar") && !g.isIn("Stinky"))){
+            failureMessage("its", "bad");
+            return;
+        }
+        for(HashMap<String, String> hm : r){
+            if(hm.get("~node1~").equals("Stinky") || hm.get("~node2~").equals("Stinky")){
+                failureMessage("its", "bad");
+                return;
+            }
+        }
+        successMessage();
+        //g.updateVertexLabel("Mike ", " Joe");
     }
 
-    public static void test_Storage() throws IOException, ParseException {
-        Storage.storeGraphAs(createDummyGraph());
-        Storage b = new Storage();
-        Graph g = b.getGraph();
-        Graph g2 = createDummyGraph();
+    public static void test_saveGraph(){
 
+
+    }
+
+    public static void test_Storage(){
+        //Graph g1 = createDummyGraph("test");
+        Storage st = new Storage();
+        st.buildAllProjects();
+        st.createNewProject("proj 5");
+        Graph g = st.getAllGraphsFromProject("proj 3").get(0);
+
+        Graph g2 = createDummyGraph("test");
         ArrayList<String> relations = g.getAllRelationshipKeysAsArray();
+        if(relations.isEmpty()){
+            failureMessage("its", "bad");
+        }
         ArrayList<String> relations2 = g2.getAllRelationshipKeysAsArray();
         for(String s : relations){
             if(!relations2.contains(s)){
@@ -78,12 +112,13 @@ public class Main {
         }
         successMessage();
     }
+
     public static void test_BFS(){
         //set io to byte array
         java.io.ByteArrayOutputStream out = new java.io.ByteArrayOutputStream();
         System.setOut(new java.io.PrintStream(out));
 
-        createDummyGraph().BFS("Reza"); // bfs search from reza node
+        createDummyGraph("test").BFS("Reza"); // bfs search from reza node
 
         //reset io stream
         System.setOut(new PrintStream(new FileOutputStream(FileDescriptor.out)));
@@ -104,7 +139,7 @@ public class Main {
         System.setOut(new java.io.PrintStream(out));
 
 
-        createDummyGraph().DFS("Reza"); // bfs search from reza node
+        createDummyGraph("test").DFS("Reza"); // bfs search from reza node
 
         //reset io stream
         System.setOut(new PrintStream(new FileOutputStream(FileDescriptor.out)));
@@ -119,7 +154,7 @@ public class Main {
     }
 
     public static void test_removeVertex(){
-        Graph g = createDummyGraph();
+        Graph g = createDummyGraph("test");
 
         g.removeVertex("Raccoon");
         g.removeVertex("Eric");
