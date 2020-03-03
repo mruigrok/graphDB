@@ -57,7 +57,7 @@ public class Storage {
 
     //Create a directory in the GraphDB home directory
     public void createStorageDirInWorking(){
-        Path dir = Paths.get(System.getProperty("user.dir") + "\\Storage");
+        Path dir = Paths.get(System.getProperty("user.dir") + "\\storage");
         try{
             Files.createDirectory(dir);
         }catch(IOException e){
