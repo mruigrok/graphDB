@@ -67,7 +67,7 @@ public class Storage {
 
     //Make sure the Storage folder is in the working directory
     public boolean isStorageDirInWorking(){
-        Path dir = Paths.get(System.getProperty("user.dir") + "\\Storage");
+        Path dir = Paths.get(System.getProperty("user.dir") + "\\storage");
         return  Files.exists(dir);
     }
 
