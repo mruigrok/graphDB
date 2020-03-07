@@ -86,7 +86,7 @@ public class Storage {
 
     //Default Storage location for the projects
     public String getStorageDir(){
-        return System.getProperty("user.dir") + "\\Storage";
+        return System.getProperty("user.dir") + "\\storage";
     }
 
     public void saveAll(){
